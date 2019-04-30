@@ -7,13 +7,17 @@ import {
 } from '../../modles/magazine.js'
 let magazine = new MagazineModel()
 
+import {
+  LikeModel
+} from '../../modles/like.js'
+let likeModel = new LikeModel()
+
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    magazine:null
+    magazine: null,
+    latest: true,
+    first: false,
+    latestNum: undefined //保存最新一期的num
   },
   //事件处理函数
   bindViewTap: function() {
@@ -23,45 +27,55 @@ Page({
   },
   onLoad: function() {
     magazine.getLatest((res) => {
-      console.log(res.result[0]);
-
       this.setData({
-        magazine: res.result[0]
+        magazine: res.result[0],
+        latestNum: res.result[0].num,
       })
     })
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
+
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+
+  likeOrCancel(e) {
+    let id = this.data.magazine.id
+    let num = this.data.magazine.num
+    wx.removeStorageSync('maga-'+num) //修改了状态之后，删除缓存，下次从数据库读取信息，并再次写入缓存 
+    let behavior = e.detail.behavior
+    likeModel.like(id, behavior)
+  },
+  onNext() {
+    let index = this.data.magazine.num
+    index++
+    if (index === this.data.latestNum) {
+      this.setData({
+        latest: true
+      })
+    }
+    this._getMagazine(index)
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      first: false
+    })
+  },
+  onPrevious() {
+    let index = this.data.magazine.num
+    index--
+    if (index === 1) {
+      this.setData({
+        first: true
+      })
+    }
+    this._getMagazine(index)
+    this.setData({
+      latest: false
+    })
+  },
+
+  _getMagazine(index) {
+    magazine.getByIndex(index, (res) => {
+      this.setData({
+        magazine: res
+      })
     })
   }
+
+
 })

@@ -1,0 +1,32 @@
+/* components/classic/music/index.wxss */
+@import "../common.wxss";
+
+.classic-img{
+  /* width: 400rpx;
+  height: 400rpx; */
+  border-radius:50%;
+}
+.player-img {
+    width: 120rpx;
+    height: 120rpx;
+    position: relative; 
+    bottom: 270rpx; 
+ }
+
+ .tag{
+   bottom: 170rpx;
+ }
+
+ .rotation {
+    transform: rotate(360deg);
+    animation: rotation 12s linear infinite;
+  }
+  
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
