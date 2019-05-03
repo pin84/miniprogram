@@ -4,12 +4,12 @@ const app = getApp()
 
 import {
   MagazineModel
-} from '../../modles/magazine.js'
+} from '../../models/magazine.js'
 let magazine = new MagazineModel()
 
 import {
   LikeModel
-} from '../../modles/like.js'
+} from '../../models/like.js'
 let likeModel = new LikeModel()
 
 Page({

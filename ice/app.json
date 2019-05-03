@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/book/index",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/book/index",
-    "pages/my/index"
+    "pages/my/index",
+    "pages/book_detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

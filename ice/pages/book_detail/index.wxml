@@ -1,0 +1,75 @@
+<!-- pages/book_detail/index.wxml -->
+<wxs src='../../utils/formatText.wxs' module='utils' />
+<view class='container'>
+  <view class='head'>
+    <image src='{{book.image}}' />
+    <text class='title'>{{book.title}}</text>
+    <text class='author'>{{book.author}}</text>
+  </view>
+  <view class='sub-container'>
+    <text class='headline'>短评</text>
+    <view class='comment-container'>
+      <blok wx:key='id' wx:for='{{comments}}'>
+        <i-tag tag-class='{{tool.highline(index)}}' text="{{item.content}}">
+          <text class='slotNum' slot='after'>{{'+'+item.fav_num}}</text>
+        </i-tag>
+      </blok>
+    </view>
+  </view>
+  <view class='sub-container'>
+    <text class='headline'>内容简介</text>
+    <text class='content'>{{book.outline}}</text>
+    <!-- <text class='content'>{{utils.format(pppppp)}}</text> -->
+  </view>
+  <view class="sub-container">
+    <text class="headline">书本信息</text>
+    <view class="detail-container">
+      <view class="vertical description">
+        <text decode='{{true}}'>出版社:&nbsp;&nbsp;&nbsp;{{book.publisher}}</text>
+        <text decode='{{true}}'>出版年:&nbsp;&nbsp;&nbsp;{{book.pubdate}}</text>
+        <text decode='{{true}}'>页数:&nbsp;&nbsp;&nbsp;{{book.pages}}</text>
+        <text decode='{{true}}'>定价:&nbsp;&nbsp;&nbsp;{{book.price}}</text>
+        <text decode='{{true}}'>装帧:&nbsp;&nbsp;&nbsp;{{book.binding}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='post-container' wx:if='{{!isShowInput}}'>
+  <view class='post-fake' bindtap='isShowInput'>
+    <text>输入短评</text>
+  </view>
+  <view class='like-container'>
+    <i-like bind:like='likeOrCancel' class='like' islike='{{book.fav_status}}' count='{{book.fav_num}}' />
+  </view>
+</view>
+
+<view class='posting-container' wx:if='{{isShowInput}}'>
+  <view class='post-header'>
+    <text>点击标签+1</text>
+    <text class='cancel' bindtap='closeInput'>取消</text>
+  </view>
+  <view class='comment-container'>
+    <blok wx:key='id' wx:for='{{utils.limit(comments,3)}}'>
+      <i-tag bind:tapText='postText' tag-class='{{tool.highline(index)}}' text="{{item.content}}">
+        <text class='slotNum' slot='after'>{{'+'+item.fav_num}}</text>
+      </i-tag>
+    </blok>
+  </view>
+  <input class='post' placeholder='短评最多12个字' />
+</view>
+
+<i-mask wx:if='{{isShowInput}}' />
+<wxs module="tool">
+  var highline = function(index) {
+    if (index == 0) {
+      return 'ex-tag1'
+    }
+    if (index == 1) {
+      return 'ex-tag2'
+    }
+    return ''
+  }
+  module.exports = {
+    highline: highline
+  }
+</wxs>

@@ -1,0 +1,12 @@
+var format = function(text) {
+  return 'aaaaa'
+}
+
+var limit = function(array, length) {
+  return array.slice(0, length)
+}
+
+module.exports = {
+  format: format,
+  limit: limit
+}

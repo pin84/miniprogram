@@ -14,6 +14,18 @@ class LikeModel extends HTTP {
       }
     })
   }
+
+  bookLikeOrCancel(bookID, behavior) {
+    this.request({
+      url: '/like',
+      method: 'POST',
+      data: {
+        id: bookID,
+        behavior: behavior,
+        type:'books'
+      }
+    })
+  }
   
 
 }

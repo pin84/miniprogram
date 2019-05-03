@@ -38,7 +38,7 @@ Component({
         islike: !islike
       })
 
-      //激活一个事件，给/page/index.js下用
+      //激活一个事件，给调用like组件的人页面用
       let behavior = this.properties.islike?'like':'cancel'
       this.triggerEvent('like',{
         behavior:behavior

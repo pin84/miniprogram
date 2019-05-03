@@ -2,7 +2,7 @@
 <view class='container'>
   <view class="header">
     <i-episode class='epsoide' index='{{magazine.num}}' />
-    <i-like class='like' islike="{{magazine.favour_status}}" count="{{magazine.favour}}" bind:like='likeOrCancel' />
+    <i-like class='like' islike="{{magazine.fav_status}}" count="{{magazine.fav_num}}" bind:like='likeOrCancel' />
   </view>
   <!-- 数据库中电影的type为1，音乐为2，句子为3 -->
   <i-movie hidden='{{magazine.type!=1}}' img='{{magazine.image}}' content='{{magazine.content}}' />
