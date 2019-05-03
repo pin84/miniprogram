@@ -8,6 +8,7 @@
   </view>
   <view class='sub-container'>
     <text class='headline'>短评</text>
+    <text class='shadow' wx:if='{{comments == false}}'>暂无短评</text>
     <view class='comment-container'>
       <blok wx:key='id' wx:for='{{comments}}'>
         <i-tag tag-class='{{tool.highline(index)}}' text="{{item.content}}">
@@ -45,7 +46,8 @@
 
 <view class='posting-container' wx:if='{{isShowInput}}'>
   <view class='post-header'>
-    <text>点击标签+1</text>
+    <text wx:if='{{comments==true}}'>点击标签+1</text>
+    <text class='shadow' wx:else>暂无短评</text>
     <text class='cancel' bindtap='closeInput'>取消</text>
   </view>
   <view class='comment-container'>
@@ -55,7 +57,7 @@
       </i-tag>
     </blok>
   </view>
-  <input class='post' placeholder='短评最多12个字' />
+  <input auto-focus='true' bindconfirm='postText' class='post' placeholder='短评最多12个字' />
 </view>
 
 <i-mask wx:if='{{isShowInput}}' />

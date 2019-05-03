@@ -169,6 +169,7 @@
 
 .cancel {
   color: #666;
+  font-size: 28rpx;
 }
 
 .post-header text {
@@ -192,6 +193,7 @@
   background-color: #f5f5f5;
   border-radius: 15px;
   padding-left: 25rpx;
+  font-size:28rpx;
 }
 
 .shadow {

@@ -10,7 +10,8 @@ Page({
    * Page initial data
    */
   data: {
-    books:[]
+    books:[],
+    isShowSearch:false
   },
 
   /**
@@ -23,6 +24,17 @@ Page({
         books:res.result
       })
       
+    })
+  },
+  search(){
+    this.setData({
+      isShowSearch:true
+    })
+  },
+
+  closeSearch(){
+    this.setData({
+      isShowSearch: false
     })
   },
 

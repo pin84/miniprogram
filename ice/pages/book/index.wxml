@@ -1,11 +1,12 @@
 <!--pages/book/index.wxml-->
-<view class='container'>
-  <view class="header">
-    <view class='box'>
-
+<view class='container' wx:if='{{!isShowSearch}}'>
+  <view class="header" >
+    <view class='box' bindtap='search'>
+      <image src="/images/icon/search.png" />
       <text>搜索书籍</text>
     </view>
   </view>
+
   <view class="mainBody">
     <h3>精选</h3>
     <view class="books">
@@ -14,6 +15,10 @@
       </block>
     </view>
   </view>
+</view>
+
+<view  wx:if='{{isShowSearch}}'>
+  <i-search bind:closeSearch='closeSearch' />
 </view>
 
 <!-- for 循环 wx:for -->

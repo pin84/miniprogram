@@ -24,20 +24,36 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function(options) {
-    const id = options.id
-    const detail = bookModel.getDetailById(id)
-    detail.then(res => {
-      this.setData({
-        book: res.detail
-      })
+    wx:wx.showLoading({
+      title: '正在加载...',
+      mask: true,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
 
+    const id = options.id
+    const detail = bookModel.getDetailById(id)
     const comments = bookModel.getCommentsByBid(id)
-    comments.then(res => {
+    Promise.all([detail, comments]).then(res =>{
       this.setData({
-        comments: res.comments
+        book: res[0].detail,
+        comments: res[1].comments
       })
+      wx.hideLoading()
     })
+
+    //以下两个方法可以用Promise.all([])代替
+    // detail.then(res => {
+    //   this.setData({
+    //     book: res.detail
+    //   })
+    // })
+    // comments.then(res => {
+    //   this.setData({
+    //     comments: res.comments
+    //   })
+    // })
   },
 
   likeOrCancel(e) {
@@ -58,26 +74,40 @@ Page({
     })
   },
   postText(e) {
-    let comment = e.detail.text
+    let comment = e.detail.text || e.detail.value
     let bid = this.data.book.id
+    
+    if(!comment){
+      return
+    }
+    if(comment.length > 12){
+      wx.showToast({
+        title: '最多不能超过12个字 ',
+        icon: 'none'
+      })
+    }
+
     this.data.comments.unshift({
       content: comment,
       fav_num: 1
     })
+
     
-    bookModel.postComment(bid, comment).then(res =>{
-      console.log(res)
-    })
+    bookModel.postComment(bid, comment).then(res => {
+      this.setData({
+        comments: this.data.comments,
+        isShowInput:false
+      })
+
+      wx.showToast({
+        title: '+1',
+        icon: 'none'
+      })
 
 
-    this.setData({
-      comments: this.data.comments
     })
 
-    wx.showToast({
-      title: '+1',
-      icon: 'none'
-    })
+   
   },
   /**
    * Lifecycle function--Called when page is initially rendered

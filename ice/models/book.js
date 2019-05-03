@@ -26,8 +26,14 @@ class BookModel extends HTTP {
       method: 'POST',
       data: {
         bid:bid,
-        comment:comment
+        content:comment
       }
+    })
+  }
+
+  searchBooks(keyword){
+    return this.request({
+      url: `/sByKeyword?keyword=${keyword}`
     })
   }
 
