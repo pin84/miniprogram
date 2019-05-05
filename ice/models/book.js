@@ -31,9 +31,9 @@ class BookModel extends HTTP {
     })
   }
 
-  searchBooks(keyword){
+  searchBooks(keyword,num=0){
     return this.request({
-      url: `/sByKeyword?keyword=${keyword}`
+      url: `/sByKeyword?keyword=${keyword}&num=${num}`
     })
   }
 

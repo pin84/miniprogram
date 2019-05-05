@@ -39,4 +39,7 @@
       <i-book showLike="{{false}}" book="{{item}}" class="book" />
     </block>
   </view>
+  <i-loading class='loading-center' wx:if='{{showLoadingOnCenter}}'/>
+ 
+ <text wx:if="{{isNullResult}}" class="empty-tip">没有搜索到书籍</text>
 </view>

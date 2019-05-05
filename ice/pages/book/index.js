@@ -10,8 +10,9 @@ Page({
    * Page initial data
    */
   data: {
-    books:[],
-    isShowSearch:false
+    books: [],
+    isShowSearch: false,
+    showMore:0
   },
 
   /**
@@ -19,22 +20,28 @@ Page({
    */
   onLoad: function(options) {
     const books = bookModel.getHotList()
-    books.then(res =>{
+    books.then(res => {
       this.setData({
-        books:res.result
+        books: res.result
       })
-      
+
     })
   },
-  search(){
+  search() {
     this.setData({
-      isShowSearch:true
+      isShowSearch: true
     })
   },
 
-  closeSearch(){
+  closeSearch() {
     this.setData({
       isShowSearch: false
+    })
+  },
+
+  onReachBottom() {
+    this.setData({
+      showMore:(new Date()).getTime()
     })
   },
 
@@ -73,13 +80,7 @@ Page({
 
   },
 
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function() {
-
-  },
-
+ 
   /**
    * Called when user click on the top right corner to share
    */

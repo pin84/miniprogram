@@ -1,10 +1,12 @@
 /**index.wxss**/
-.container{
+
+.container {
   width: 100%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   font-size: 32rpx;
 }
+
 .header {
   width: 100%;
   display: flex;
@@ -25,7 +27,25 @@
   margin-right: 26rpx;
 }
 
-.nav{
+.nav {
   position: absolute;
   bottom: 20rpx;
+}
+
+.like-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 30rpx;
+}
+
+.share-btn {
+  margin-top: 28rpx;
+  margin-left: 10rpx;
+}
+
+.share {
+  width: 40rpx;
+  height: 40rpx;
 }
