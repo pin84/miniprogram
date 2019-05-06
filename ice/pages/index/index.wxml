@@ -11,7 +11,7 @@
   </view>
   <!-- 数据库中电影的type为1，音乐为2，句子为3 -->
   <i-movie hidden='{{magazine.type!=1}}' img='{{magazine.image}}' content='{{magazine.content}}' />
-  <i-music wx:if='{{magazine.type === "2"}}' img='{{magazine.image}}' content='{{magazine.content}}' src='{{magazine.music_url}}' title='{{magazine.title}}' />
+  <!-- <i-music wx:if='{{magazine.type === "2"}}' img='{{magazine.image}}' content='{{magazine.content}}' src='{{magazine.music_url}}' title='{{magazine.title}}' /> -->
   <i-essay hidden='{{magazine.type!=3}}' img='{{magazine.image}}' content='{{magazine.content}}' />
 
   <i-nav bind:onNext='onNext' bind:onPrevious='onPrevious' title='{{magazine.title}}' latest='{{latest}}' first='{{first}}' class='nav' />

@@ -7,7 +7,7 @@ Page({
   data: {
     authorized: false,
     userInfo: null,
-    bookCount:88
+    bookCount:0
   },
 
   /**

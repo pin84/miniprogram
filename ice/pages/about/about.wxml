@@ -1,6 +1,8 @@
 <!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
 
-<navigator class="nav" target="miniProgram" app-id="wx8ffc97ad5bcccc89" open-type="navigate">
+
+<!-- <navigator class="nav" target="miniProgram" app-id="wx8ffc97ad5bcccc89" open-type="navigate">
 这里是跟到另一个小程序的示例（不完整版）
-</navigator>
+</navigator> -->
+<view>联系电话：18620885204</view>
+<view>地址：广州黄埔区沙通社区42巷13号</view>
